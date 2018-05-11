@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "hash_table.h"
+#include "hotrace.h"
 
 int		allocate_table(t_table *table, int size)
 {
@@ -91,46 +92,65 @@ int		ft_strcmp(char *str1, char *str2)
 	return (1);
 }
 
-char	*search(t_table *table, char *key)
+void	search(t_table *table, char *key)
 {
 	int		index;
 	t_entry	*entry;
+	int		size;
 
 	index = hash(key, table->size);
 	entry = (table->entry)[index];
 	while (entry)
 	{
 		if (ft_strcmp(entry->key, key))
-			return (entry->val);
+		{
+			write(1, entry->val, hr_strlen(entry->val));
+		//	write(1, "\n", 1);
+			return ;
+		}
 		entry = entry->next;
 	}
-	return (NULL);
+	size = hr_strlen(key);
+	write(1, key, size);
+	write(1, ": Not found.\n", 13);
 }
 
-/*
+
 int		main(void)
 {
 	t_table	table;
-	t_entry	*entry;
-	char	str1[] = "hello";
-	char	str2[] = "world";
-	char	str3[] = "foo";
-	char	str4[] = "bar";
-	char	str5[] = "olleh";
-	char	str6[] = "dlrow";
+	//t_entry	*entry;
+	char	*key;
+	char	*value;
+//	char	str1[] = "hello";
+//	char	str2[] = "world";
+//	char	str3[] = "foo";
+//	char	str4[] = "bar";
+//	char	str5[] = "olleh";
+//	char	str6[] = "dlrow";
 
-	if (!(allocate_table(&table, 256)))
+	if (!(allocate_table(&table, 62000)))
 		return (1);
-	store(&table, str1, str2);
-	store(&table, str3, str4);
-	store(&table, str5, str6);
-	print(&table);
-
-	printf("--- Search Result ---\n");
-	printf("%s: %s\n", str1, search(&table, str1));
-	printf("%s: %s\n", str3, search(&table, str3));
-	printf("%s: %s\n", str5, search(&table, str5));
-	printf("%s: %s\n", str2, search(&table, str2));
+	while (hr_gnl(0, &key) && hr_gnl(0, &value))
+	{
+		if (key[0] == '\0' || value[0] == '\0')
+			break ;
+		store(&table, key, value);
+		//printf("%s %s\n", key, value);
+	}
+//	store(&table, str1, str2);
+//	store(&table, str3, str4);
+//	store(&table, str5, str6);
+//	print(&table);
+	while (hr_gnl(0, &key))
+	{
+		search(&table, key);
+	}
+//	printf("--- Search Result ---\n");
+//	printf("%s: %s\n", str1, search(&table, str1));
+//	printf("%s: %s\n", str3, search(&table, str3));
+//	printf("%s: %s\n", str5, search(&table, str5));
+//	printf("%s: %s\n", str2, search(&table, str2));
 	return (0);
 }
-*/
+

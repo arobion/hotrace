@@ -181,10 +181,13 @@ int		main(void)
 {
 //	t_table *table;
 	char	*std;
+	int		nb;
 	
 //	if (!(std = save_std()))
 //		return (0);
-	while (hr_gnl(0, &std));
+	nb = hr_gnl(0, &std);
+	printf("%d\n", nb);
+
 
 	return (0);
 }

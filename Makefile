@@ -16,7 +16,7 @@ CFLAGS = -Wall -Werror -Wextra
 
 NAME = hotrace
 
-SRC =	main.c \
+SRC =	hash_table.c \
 		gnl.c \
 		string.c
 

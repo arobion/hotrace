@@ -69,5 +69,7 @@ int					hr_gnl(int const fd, char **line)
 		++i;
 	else
 		return (hr_complete_line(fd, line));
+//	if (hr_strlen(*line) == 0)
+//		return (0);
 	return (1);
 }
