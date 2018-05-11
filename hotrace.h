@@ -14,7 +14,9 @@
 # define HOTRACE_H
 # include <unistd.h>
 # include <stdlib.h>
+# define BUFF_SIZE 1080
 
-
+int		hr_gnl(int const fd, char **line);
+int		hr_strlen(const char *str);
 
 #endif

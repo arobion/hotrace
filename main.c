@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "hotrace.h"
-#include <stdio.h>
 
 /*
 char	*parse_keyvalue(int *i, int *j, char *l)
@@ -104,7 +103,6 @@ void	save_in_ret(char *l, char *ret, int *nb)
 	int		i;
 
 	i = 0;
-	dprintf(1, "%d\n", *nb);
 	while (i < *nb)
 	{
 		ret[i] = l[i];
@@ -148,7 +146,7 @@ void	cpy_l_in_ret(char *l, char *ret, int *i, int nb)
 	}
 }
 
-
+#include <stdio.h>
 char	*save_std(void)
 {
 	char	*ret;
@@ -157,27 +155,25 @@ char	*save_std(void)
 	int		i;
 	int		nb;
 
-	if (!(l = malloc(sizeof(char) * 100000)))
+	if (!(l = malloc(sizeof(char) * 10000000000)))
 		return (NULL);
-	if (!(ret = malloc(sizeof(char) * 100000)))
+	if (!(ret = malloc(sizeof(char) * 1000000000)))
 		return (NULL);
-	i = read(0, l, 100000);
+	i = read(0, l, 1000000000);
 	save_in_ret(l, ret, &i);
-	while ((nb = read(0, l, 100000)))
+	while ((nb = read(0, l, 1000000000)))
 	{
+		dprintf(1, "%d\n", i);
 		if (!(tmp = malloc(sizeof(char) * i)))
 			return (NULL);
 		cpy_in_tmp(ret, tmp, &i);
-	//	dprintf(1, "%s", tmp);
 		free(ret);
 		if (!(ret = malloc(sizeof(char) * (i + nb))))
 			return (NULL);
 		cpy_tmp_in_ret(tmp, ret, &i);
-	//	dprintf(1, "%s", tmp);
 		cpy_l_in_ret(l, ret, &i, nb);
 		free(tmp);
 	}
-	dprintf(1, "%d\n", i);
 	return (ret);
 }
 
@@ -186,11 +182,9 @@ int		main(void)
 //	t_table *table;
 	char	*std;
 	
-	if (!(std = save_std()))
-		return (0);
-//	dprintf(1, "%s\n", std);
-	
-
+//	if (!(std = save_std()))
+//		return (0);
+	while (hr_gnl(0, &std));
 
 	return (0);
 }

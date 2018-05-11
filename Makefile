@@ -16,7 +16,9 @@ CFLAGS = -Wall -Werror -Wextra
 
 NAME = hotrace
 
-SRC = main.c \
+SRC =	main.c \
+		gnl.c \
+		string.c
 
 OBJ = $(SRC:.c=.o)
 
