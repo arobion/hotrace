@@ -12,6 +12,24 @@
 
 #ifndef HASH_TABLE_H
 # define HASH_TABLE_H
+# define WRITE_SIZE 4096
+
+static char			g_err_message[13] =
+{
+	':',
+	' ',
+	'N',
+	'o',
+	't',
+	' ',
+	'f',
+	'o',
+	'u',
+	'n',
+	'd',
+	'.',
+	'\n'
+};
 
 typedef struct		s_entry
 {
@@ -22,6 +40,8 @@ typedef struct		s_entry
 
 typedef struct		s_table
 {
+	char			buff[WRITE_SIZE];
+	int				index_buff;
 	int				size;
 	struct s_entry	**entry;
 }					t_table;

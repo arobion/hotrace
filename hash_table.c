@@ -92,11 +92,53 @@ int		ft_strcmp(char *str1, char *str2)
 	return (1);
 }
 
+void	fill_buff(char *str, t_table *table)
+{
+	while (*str)
+	{
+		if (table->index_buff == WRITE_SIZE)
+		{
+			write(1, table->buff, WRITE_SIZE);
+			table->index_buff = 0;
+		}
+		table->buff[table->index_buff] = *str++;
+		(table->index_buff)++;
+	}
+	table->buff[table->index_buff] = '\n';
+	(table->index_buff)++;
+}
+
+void	fill_buff_not_found(char *str, t_table *table)
+{
+	int		i;
+
+	i = 0;
+	while(*str)
+	{
+		if (table->index_buff == WRITE_SIZE)
+		{
+			write(1, table->buff, WRITE_SIZE);
+			table->index_buff = 0;
+		}
+		table->buff[table->index_buff] = *str++;
+		(table->index_buff)++;
+	}
+	while (i < 13)
+	{
+		if (table->index_buff == WRITE_SIZE)
+		{
+			write(1, table->buff, WRITE_SIZE);
+			table->index_buff = 0;
+		}
+		table->buff[table->index_buff] = g_err_message[i++];
+		(table->index_buff)++;
+	}
+}
+
 void	search(t_table *table, char *key)
 {
 	int		index;
 	t_entry	*entry;
-	int		size;
 
 	index = hash(key, table->size);
 	entry = (table->entry)[index];
@@ -104,15 +146,15 @@ void	search(t_table *table, char *key)
 	{
 		if (ft_strcmp(entry->key, key))
 		{
-			write(1, entry->val, hr_strlen(entry->val));
-		//	write(1, "\n", 1);
+			fill_buff(entry->val, table);
 			return ;
 		}
 		entry = entry->next;
 	}
-	size = hr_strlen(key);
-	write(1, key, size);
-	write(1, ": Not found.\n", 13);
+	fill_buff_not_found(key, table);
+	//	size = hr_strlen(key);
+	//	write(1, key, size);
+	//	write(1, ": Not found.\n", 13);
 }
 
 
@@ -122,13 +164,14 @@ int		main(void)
 	//t_entry	*entry;
 	char	*key;
 	char	*value;
-//	char	str1[] = "hello";
-//	char	str2[] = "world";
-//	char	str3[] = "foo";
-//	char	str4[] = "bar";
-//	char	str5[] = "olleh";
-//	char	str6[] = "dlrow";
+	//	char	str1[] = "hello";
+	//	char	str2[] = "world";
+	//	char	str3[] = "foo";
+	//	char	str4[] = "bar";
+	//	char	str5[] = "olleh";
+	//	char	str6[] = "dlrow";
 
+	table.index_buff = 0;
 	if (!(allocate_table(&table, 62000)))
 		return (1);
 	while (hr_gnl(0, &key) && hr_gnl(0, &value))
@@ -138,19 +181,22 @@ int		main(void)
 		store(&table, key, value);
 		//printf("%s %s\n", key, value);
 	}
-//	store(&table, str1, str2);
-//	store(&table, str3, str4);
-//	store(&table, str5, str6);
-//	print(&table);
+	//	store(&table, str1, str2);
+	//	store(&table, str3, str4);
+	//	store(&table, str5, str6);
+	//	print(&table);
+	if (key[0] == '\0')
+		search(&table, value);
 	while (hr_gnl(0, &key))
 	{
 		search(&table, key);
 	}
-//	printf("--- Search Result ---\n");
-//	printf("%s: %s\n", str1, search(&table, str1));
-//	printf("%s: %s\n", str3, search(&table, str3));
-//	printf("%s: %s\n", str5, search(&table, str5));
-//	printf("%s: %s\n", str2, search(&table, str2));
+	write(1, table.buff, table.index_buff);
+	//	printf("--- Search Result ---\n");
+	//	printf("%s: %s\n", str1, search(&table, str1));
+	//	printf("%s: %s\n", str3, search(&table, str3));
+	//	printf("%s: %s\n", str5, search(&table, str5));
+	//	printf("%s: %s\n", str2, search(&table, str2));
 	return (0);
 }
 
