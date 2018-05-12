@@ -6,7 +6,7 @@
 /*   By: nkamolba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 20:43:47 by nkamolba          #+#    #+#             */
-/*   Updated: 2018/05/11 21:44:32 by nkamolba         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:46:42 by nkamolba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ int		create_entry(t_entry **entry, char *key, char *val)
 
 int		hash(char *str, int	size)
 {
-	int		sum;
+	int		hash;
 
-	sum = 0;
+	hash = 5381;
 	while (*str)
-		sum += *str++;
-	return (sum % size);
+		hash = (((hash << 5) + hash) + *str++) % size;
+	return (hash);
 }
 
 void	store(t_table *table, char *key, char *val)
@@ -177,7 +177,7 @@ int		main(void)
 	char	*value;
 
 	table.index_buff = 0;
-	if (!(allocate_table(&table, 62000)))
+	if (!(allocate_table(&table, 65536)))
 		return (1);
 	while (hr_gnl(0, &key) && hr_gnl(0, &value))
 	{
