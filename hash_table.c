@@ -6,13 +6,12 @@
 /*   By: nkamolba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 20:43:47 by nkamolba          #+#    #+#             */
-/*   Updated: 2018/05/12 15:46:42 by nkamolba         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:54:37 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "hash_table.h"
 #include "hotrace.h"
 
 int		allocate_table(t_table *table, int size)

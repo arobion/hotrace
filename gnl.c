@@ -6,12 +6,10 @@
 /*   By: gabtoubl <gabtoubl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/15 19:50:24 by gabtoubl          #+#    #+#             */
-/*   Updated: 2013/12/15 22:18:23 by gabtoubl         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:55:45 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include			<unistd.h>
-#include			<stdlib.h>
 #include			"hotrace.h"
 
 static char			*hr_strjoin(char const *s1, char const *s2)
