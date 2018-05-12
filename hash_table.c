@@ -17,8 +17,14 @@
 
 int		allocate_table(t_table *table, int size)
 {
+	int		i = 0;
 	if (!(table->entry = (t_entry **)malloc(sizeof(t_entry*) * size)))
 		return (0);
+	while (i < size)
+	{
+		table->entry[i] = NULL;
+		i++;
+	}
 	table->size = size;
 	return (1);
 }
@@ -96,16 +102,21 @@ void	fill_buff(char *str, t_table *table)
 {
 	while (*str)
 	{
+		table->buff[table->index_buff] = *str++;
+		(table->index_buff)++;
 		if (table->index_buff == WRITE_SIZE)
 		{
 			write(1, table->buff, WRITE_SIZE);
 			table->index_buff = 0;
 		}
-		table->buff[table->index_buff] = *str++;
-		(table->index_buff)++;
 	}
 	table->buff[table->index_buff] = '\n';
 	(table->index_buff)++;
+	if (table->index_buff == WRITE_SIZE)
+	{
+		write(1, table->buff, WRITE_SIZE);
+		table->index_buff = 0;
+	}
 }
 
 void	fill_buff_not_found(char *str, t_table *table)
@@ -115,23 +126,25 @@ void	fill_buff_not_found(char *str, t_table *table)
 	i = 0;
 	while(*str)
 	{
+		
+		table->buff[table->index_buff] = *str++;
+		(table->index_buff)++;
 		if (table->index_buff == WRITE_SIZE)
 		{
 			write(1, table->buff, WRITE_SIZE);
 			table->index_buff = 0;
 		}
-		table->buff[table->index_buff] = *str++;
-		(table->index_buff)++;
 	}
 	while (i < 13)
 	{
+		
+		table->buff[table->index_buff] = g_err_message[i++];
+		(table->index_buff)++;
 		if (table->index_buff == WRITE_SIZE)
 		{
 			write(1, table->buff, WRITE_SIZE);
 			table->index_buff = 0;
 		}
-		table->buff[table->index_buff] = g_err_message[i++];
-		(table->index_buff)++;
 	}
 }
 
@@ -144,6 +157,7 @@ void	search(t_table *table, char *key)
 	entry = (table->entry)[index];
 	while (entry)
 	{
+
 		if (ft_strcmp(entry->key, key))
 		{
 			fill_buff(entry->val, table);
@@ -152,9 +166,6 @@ void	search(t_table *table, char *key)
 		entry = entry->next;
 	}
 	fill_buff_not_found(key, table);
-	//	size = hr_strlen(key);
-	//	write(1, key, size);
-	//	write(1, ": Not found.\n", 13);
 }
 
 
@@ -164,12 +175,6 @@ int		main(void)
 	//t_entry	*entry;
 	char	*key;
 	char	*value;
-	//	char	str1[] = "hello";
-	//	char	str2[] = "world";
-	//	char	str3[] = "foo";
-	//	char	str4[] = "bar";
-	//	char	str5[] = "olleh";
-	//	char	str6[] = "dlrow";
 
 	table.index_buff = 0;
 	if (!(allocate_table(&table, 62000)))
@@ -179,11 +184,7 @@ int		main(void)
 		if (key[0] == '\0' || value[0] == '\0')
 			break ;
 		store(&table, key, value);
-		//printf("%s %s\n", key, value);
 	}
-	//	store(&table, str1, str2);
-	//	store(&table, str3, str4);
-	//	store(&table, str5, str6);
 	//	print(&table);
 	if (key[0] == '\0')
 		search(&table, value);
