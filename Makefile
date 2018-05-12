@@ -6,7 +6,7 @@
 #    By: arobion <arobion@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/11 18:20:34 by arobion           #+#    #+#              #
-#    Updated: 2018/05/11 18:27:39 by arobion          ###   ########.fr        #
+#    Updated: 2018/05/12 16:24:11 by arobion          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,10 @@ NAME = hotrace
 
 SRC =	hash_table.c \
 		gnl.c \
-		string.c
+		string.c \
+		store.c \
+		search.c \
+		write.c
 
 OBJ = $(SRC:.c=.o)
 

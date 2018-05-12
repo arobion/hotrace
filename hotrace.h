@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 18:24:06 by arobion           #+#    #+#             */
-/*   Updated: 2018/05/12 15:53:58 by arobion          ###   ########.fr       */
+/*   Updated: 2018/05/12 16:23:46 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,11 @@ typedef struct		s_table
 
 int					hr_gnl(int const fd, char **line);
 int					hr_strlen(const char *str);
+void				store(t_table *table, char *key, char *val);
+int					allocate_table(t_table *table, int size);
+int					hash(char *str, int size);
+void				search(t_table *table, char *key);
+void				fill_buff(char *str, t_table *table);
+void				fill_buff_not_found(char *str, t_table *table);
 
 #endif
