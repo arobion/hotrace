@@ -6,11 +6,10 @@
 /*   By: nkamolba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 20:43:47 by nkamolba          #+#    #+#             */
-/*   Updated: 2018/05/12 15:54:37 by arobion          ###   ########.fr       */
+/*   Updated: 2018/05/12 16:00:01 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdio.h>
 #include "hotrace.h"
 
@@ -171,7 +170,6 @@ void	search(t_table *table, char *key)
 int		main(void)
 {
 	t_table	table;
-	//t_entry	*entry;
 	char	*key;
 	char	*value;
 
@@ -184,7 +182,6 @@ int		main(void)
 			break ;
 		store(&table, key, value);
 	}
-	//	print(&table);
 	if (key[0] == '\0')
 		search(&table, value);
 	while (hr_gnl(0, &key))
@@ -192,11 +189,6 @@ int		main(void)
 		search(&table, key);
 	}
 	write(1, table.buff, table.index_buff);
-	//	printf("--- Search Result ---\n");
-	//	printf("%s: %s\n", str1, search(&table, str1));
-	//	printf("%s: %s\n", str3, search(&table, str3));
-	//	printf("%s: %s\n", str5, search(&table, str5));
-	//	printf("%s: %s\n", str2, search(&table, str2));
 	return (0);
 }
 

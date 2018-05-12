@@ -6,11 +6,11 @@
 /*   By: gabtoubl <gabtoubl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/15 19:50:24 by gabtoubl          #+#    #+#             */
-/*   Updated: 2018/05/12 15:55:45 by arobion          ###   ########.fr       */
+/*   Updated: 2018/05/12 15:57:51 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include			"hotrace.h"
+#include "hotrace.h"
 
 static char			*hr_strjoin(char const *s1, char const *s2)
 {
@@ -67,7 +67,5 @@ int					hr_gnl(int const fd, char **line)
 		++i;
 	else
 		return (hr_complete_line(fd, line));
-//	if (hr_strlen(*line) == 0)
-//		return (0);
 	return (1);
 }

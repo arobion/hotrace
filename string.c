@@ -6,12 +6,11 @@
 /*   By: gabtoubl <gabtoubl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/13 21:00:54 by gabtoubl          #+#    #+#             */
-/*   Updated: 2013/12/14 02:07:07 by gabtoubl         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:58:16 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<unistd.h>
-#include	"hotrace.h"
+#include "hotrace.h"
 
 int			hr_strlen(const char *str)
 {
