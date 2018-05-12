@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 18:24:06 by arobion           #+#    #+#             */
-/*   Updated: 2018/05/12 16:23:46 by arobion          ###   ########.fr       */
+/*   Updated: 2018/05/12 16:36:11 by nkamolba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # define BUFF_SIZE 1080
 # define WRITE_SIZE 4096
+# define HASH_TABLE_SIZE 65536
 
 static char			g_err_message[13] =
 {
@@ -57,5 +58,6 @@ int					hash(char *str, int size);
 void				search(t_table *table, char *key);
 void				fill_buff(char *str, t_table *table);
 void				fill_buff_not_found(char *str, t_table *table);
+void				free_table(t_entry **entry);
 
 #endif

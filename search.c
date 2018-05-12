@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 16:18:51 by arobion           #+#    #+#             */
-/*   Updated: 2018/05/12 16:19:36 by arobion          ###   ########.fr       */
+/*   Updated: 2018/05/12 16:32:39 by nkamolba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,11 @@ void	search(t_table *table, char *key)
 		if (ft_strcmp(entry->key, key))
 		{
 			fill_buff(entry->val, table);
+			free(key);
 			return ;
 		}
 		entry = entry->next;
 	}
 	fill_buff_not_found(key, table);
+	free(key);
 }
