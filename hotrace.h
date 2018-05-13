@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 18:24:06 by arobion           #+#    #+#             */
-/*   Updated: 2018/05/13 14:34:16 by arobion          ###   ########.fr       */
+/*   Updated: 2018/05/13 16:03:50 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ typedef struct		s_save
 
 typedef struct		s_entry
 {
-	char			*key;
-	char			*val;
+	int				key;
+	int				val;
 	struct s_entry	*next;
 }					t_entry;
 
@@ -60,12 +60,12 @@ typedef struct		s_table
 
 int					hr_gnl(int const fd, char **line);
 int					hr_strlen(const char *str);
-void				store(t_table *table, char *key, char *val);
+void				store(t_table *table,char *line, int key, int val);
 int					allocate_table(t_table *table, int size);
-int					hash(char *str, int size);
-void				search(t_table *table, char *key);
-void				fill_buff(char *str, t_table *table);
-void				fill_buff_not_found(char *str, t_table *table);
+int					hash(char *str, int i, int table_size);
+void				search(t_table *table, char *line, int key);
+void				fill_buff(t_table *table, char *str, int index);
+void				fill_buff_not_found(t_table *table, char *str, int index);
 void				free_table(t_entry **entry);
 int					fill_line(char **line);
 

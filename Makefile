@@ -6,24 +6,24 @@
 #    By: arobion <arobion@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/11 18:20:34 by arobion           #+#    #+#              #
-#    Updated: 2018/05/13 14:34:26 by arobion          ###   ########.fr        #
+#    Updated: 2018/05/13 15:51:34 by arobion          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -g3
+CFLAGS = -Wall -Werror -Wextra
 
 NAME = hotrace
 
-SRC =	hash_table.c \
+SRC =	test.c \
 		gnl.c \
 		string.c \
-		store.c \
-		search.c \
-		write.c \
 		free_table.c \
-		gnl2.c
+		gnl2.c \
+		write.c \
+#		store.c \
+		search.c \
 
 OBJ = $(SRC:.c=.o)
 

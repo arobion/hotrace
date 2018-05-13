@@ -6,18 +6,19 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 16:22:10 by arobion           #+#    #+#             */
-/*   Updated: 2018/05/12 16:24:55 by arobion          ###   ########.fr       */
+/*   Updated: 2018/05/13 16:03:05 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hotrace.h"
 
-void	fill_buff(char *str, t_table *table)
+void	fill_buff(t_table *table, char *str, int index)
 {
-	while (*str)
+	while (str[index] != '\n' && str[index] != '\0')
 	{
-		table->buff[table->index_buff] = *str++;
+		table->buff[table->index_buff] = str[index];
 		(table->index_buff)++;
+		index++;
 		if (table->index_buff == WRITE_SIZE)
 		{
 			write(1, table->buff, WRITE_SIZE);
@@ -33,15 +34,16 @@ void	fill_buff(char *str, t_table *table)
 	}
 }
 
-void	fill_buff_not_found(char *str, t_table *table)
+void	fill_buff_not_found(t_table *table, char *str, int index)
 {
 	int		i;
 
 	i = 0;
-	while (*str)
+	while (str[index] != '\n' && str[index] != '\0')
 	{
-		table->buff[table->index_buff] = *str++;
+		table->buff[table->index_buff] = str[index];
 		(table->index_buff)++;
+		index++;
 		if (table->index_buff == WRITE_SIZE)
 		{
 			write(1, table->buff, WRITE_SIZE);

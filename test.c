@@ -1,18 +1,5 @@
-#include <stdlib.h>
+#include "hotrace.h"
 #include <stdio.h>
-
-typedef struct		s_entry
-{
-	int				key;
-	int				val;
-	struct s_entry	*next;
-}					t_entry;
-
-typedef struct		s_table
-{
-	int				size;
-	struct s_entry	**entry;
-}					t_table;
 
 int		allocate_table(t_table *table, int size)
 {
@@ -51,6 +38,7 @@ int		create_entry(t_entry **entry, char *line, int key, int val)
 {
 	t_entry	*new;
 
+	(void)line;
 	if (!(new = (t_entry *)malloc(sizeof(t_entry))))
 		return (0);
 	new->key = key;
@@ -82,6 +70,17 @@ int		ft_strcmp(char *line, int i1, int i2)
 	return (1);
 }
 
+void	print_val(char *line, int index)
+{
+	while (line[index] != '\n' && line[index] != '\0')
+	{
+		write(1, &line[index], 1);
+		index++;
+	}
+	write(1, "\n", 1);
+}
+
+
 void	search(t_table *table, char *line, int key)
 {
 	int		index;
@@ -93,13 +92,12 @@ void	search(t_table *table, char *line, int key)
 	{
 		if (ft_strcmp(line, entry->key, key))
 		{
-			//fill_buff(entry->val, table);
-			printf("key: %d, val: %d\n", entry->key, entry->val);
+			fill_buff(table, line, entry->val);
 			return ;
 		}
 		entry = entry->next;
 	}
-	//fill_buff_not_found(key, table);
+	fill_buff_not_found(table, line, key);
 	printf("key %d not found\n", key);
 }
 
@@ -122,28 +120,100 @@ void	free_all(t_table *table, char *line)
 		i++;
 	}
 	free(table->entry);
-	//free(line);
+	free(line);
+}
+
+int		check_end_store(char *line, int i)
+{
+	if (line[i - 1] == '\0')
+		return (0);
+	if (line[i] == '\n')
+		return (0);
+	return (1);
+}
+
+void	store_phase(t_table *table, char *line, int *i)
+{
+	int		key;
+	int		value;
+
+	key = *i;
+	while (line[*i] != '\n' && line[*i] != '\0')
+		(*i)++;
+	(*i)++;
+	value = *i;
+	if (!check_end_store(line, *i))
+		return ;
+	store(table, line, key, value);
+	while (check_end_store(line, *i))
+	{
+		while (line[*i] != '\n' && line[*i] != '\0')
+			(*i)++;
+		(*i)++;
+		key = *i;
+		if (!check_end_store(line, *i))
+			return ;
+		while (line[*i] != '\n' && line[*i] != '\0')
+			(*i)++;
+		(*i)++;
+		value = *i;
+		if (!check_end_store(line, *i))
+			return ;
+		store(table, line, key, value);
+	}
+}
+
+int		check_end_search(char *line, int i)
+{
+	if (line[i - 1] == '\0')
+		return (0);
+	if (line[i] == '\0')
+		return (0);
+	return (1);
+}
+
+void	search_phase(t_table *table, char *line, int *i)
+{
+	int		key;
+	int		j;
+	
+	j = 0;
+	while (check_end_search(line, *i))
+	{
+		while (line[*i] != '\n' && line[*i] != '\0')
+			(*i)++;
+		(*i)++;
+		key = (*i);
+		if (!check_end_search(line, *i))
+			return ;
+		search(table, line, key);
+	}
 }
 
 int		main(void)
 {
 	t_table	table;
 	int		entry_nb;
-	char	line[] = "key1\nval1\nkey2\nval2\nkey3\nval3";
+//	char	line[] = "key1\nval1\nkey2\nval2\nkey3\nval3";
+	char	*line;
+	int		i;
 
-	entry_nb = 65536;
-	if (!allocate_table(&table, entry_nb / 0.8))
+	entry_nb = fill_line(&line);
+	if (!allocate_table(&table, entry_nb))
 		return (1);
-
+	i = 0;
+	store_phase(&table, line, &i);
+	search_phase(&table, line, &i);
 	// store phase
-	store(&table, line, 0, 5);
-	store(&table, line, 10, 15);
-	store(&table, line, 20, 25);
+//	store(&table, line, 0, 5);
+//	store(&table, line, 10, 15);
+//	store(&table, line, 20, 25);
 
 	// search phase
-	search(&table, line, 10);
-	search(&table, line, 5);
-	search(&table, line, 25);
+//	search(&table, line, 10);
+//	search(&table, line, 5);
+//	search(&table, line, 25);
+	write(1, table.buff, table.index_buff);
 	free_all(&table, line);
 	return (0);
 }
