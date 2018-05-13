@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/13 16:33:16 by arobion           #+#    #+#             */
-/*   Updated: 2018/05/13 16:33:19 by arobion          ###   ########.fr       */
+/*   Updated: 2018/05/13 18:38:44 by nkamolba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int		main(void)
 	int		i;
 
 	entry_nb = fill_line(&line);
+	if (!line)
+		return (1);
 	if (!allocate_table(&table, entry_nb))
 		return (1);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/13 16:26:55 by arobion           #+#    #+#             */
-/*   Updated: 2018/05/13 16:27:33 by arobion          ###   ########.fr       */
+/*   Updated: 2018/05/13 18:28:48 by nkamolba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		hash(char *line, int i, int table_size)
 	hash = 5381;
 	while (!is_end(line, i))
 		hash = (((hash << 5) + hash) + line[i++]) % table_size;
-	return (hash);
+	return (hash % table_size);
 }
 
 void	free_all(t_table *table, char *line)

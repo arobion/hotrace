@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/13 16:27:37 by arobion           #+#    #+#             */
-/*   Updated: 2018/05/13 16:32:06 by arobion          ###   ########.fr       */
+/*   Updated: 2018/05/13 16:54:06 by nkamolba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ void	store_phase(t_table *table, char *line, int *i)
 
 int		check_end_search(char *line, int i)
 {
+	if (i > 1)
+	{
+		if (line[i - 2] == '\n' && line[i - 1] == '\n')
+			return (1);
+	}
 	if (line[i - 1] == '\0')
 		return (0);
 	if (line[i] == '\0')

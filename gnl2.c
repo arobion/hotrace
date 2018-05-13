@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 17:51:50 by arobion           #+#    #+#             */
-/*   Updated: 2018/05/13 16:39:15 by nkamolba         ###   ########.fr       */
+/*   Updated: 2018/05/13 18:38:28 by nkamolba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,17 @@ int		fill_line(char **line)
 
 	if (!(l = malloc(sizeof(char) * READ_SIZE + 1)))
 		return (0);
-	i = read(0, l, READ_SIZE);
+	if (!(i = read(0, l, READ_SIZE)))
+	{
+		free(l);
+		return (0);
+	}
 	l[READ_SIZE] = '\0';
 	if (!(save = new_cell(l, i)))
+	{
+		free(l);
 		return (0);
+	}
 	free(l);
 	return (save_gnl(save, line, i));
 }
