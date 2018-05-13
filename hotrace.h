@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 18:24:06 by arobion           #+#    #+#             */
-/*   Updated: 2018/05/12 16:36:11 by nkamolba         ###   ########.fr       */
+/*   Updated: 2018/05/13 14:34:16 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define BUFF_SIZE 1080
 # define WRITE_SIZE 4096
 # define HASH_TABLE_SIZE 65536
+# define READ_SIZE 65536
 
 static char			g_err_message[13] =
 {
@@ -34,6 +35,13 @@ static char			g_err_message[13] =
 	'.',
 	'\n'
 };
+
+typedef struct		s_save
+{
+	char			*save_line;
+	int				size;
+	struct s_save	*next;
+}					t_save;
 
 typedef struct		s_entry
 {
@@ -59,5 +67,6 @@ void				search(t_table *table, char *key);
 void				fill_buff(char *str, t_table *table);
 void				fill_buff_not_found(char *str, t_table *table);
 void				free_table(t_entry **entry);
+int					fill_line(char **line);
 
 #endif
