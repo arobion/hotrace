@@ -6,7 +6,7 @@
 #    By: arobion <arobion@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/11 18:20:34 by arobion           #+#    #+#              #
-#    Updated: 2018/05/13 16:06:26 by nkamolba         ###   ########.fr        #
+#    Updated: 2018/05/13 16:17:40 by arobion          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,9 @@ CFLAGS = -Wall -Werror -Wextra
 NAME = hotrace
 
 SRC =	test.c \
-		gnl.c \
 		string.c \
 		gnl2.c \
 		write.c \
-#		store.c \
-		search.c \
 
 OBJ = $(SRC:.c=.o)
 
