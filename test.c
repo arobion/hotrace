@@ -98,7 +98,6 @@ void	search(t_table *table, char *line, int key)
 		entry = entry->next;
 	}
 	fill_buff_not_found(table, line, key);
-	printf("key %d not found\n", key);
 }
 
 void	free_all(t_table *table, char *line)
@@ -194,7 +193,6 @@ int		main(void)
 {
 	t_table	table;
 	int		entry_nb;
-//	char	line[] = "key1\nval1\nkey2\nval2\nkey3\nval3";
 	char	*line;
 	int		i;
 
@@ -204,15 +202,6 @@ int		main(void)
 	i = 0;
 	store_phase(&table, line, &i);
 	search_phase(&table, line, &i);
-	// store phase
-//	store(&table, line, 0, 5);
-//	store(&table, line, 10, 15);
-//	store(&table, line, 20, 25);
-
-	// search phase
-//	search(&table, line, 10);
-//	search(&table, line, 5);
-//	search(&table, line, 25);
 	write(1, table.buff, table.index_buff);
 	free_all(&table, line);
 	return (0);

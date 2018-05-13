@@ -6,7 +6,7 @@
 #    By: arobion <arobion@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/11 18:20:34 by arobion           #+#    #+#              #
-#    Updated: 2018/05/13 15:51:34 by arobion          ###   ########.fr        #
+#    Updated: 2018/05/13 16:06:26 by nkamolba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ NAME = hotrace
 SRC =	test.c \
 		gnl.c \
 		string.c \
-		free_table.c \
 		gnl2.c \
 		write.c \
 #		store.c \
