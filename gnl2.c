@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 17:51:50 by arobion           #+#    #+#             */
-/*   Updated: 2018/05/13 15:20:26 by arobion          ###   ########.fr       */
+/*   Updated: 2018/05/13 16:39:15 by nkamolba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int		save_gnl(t_save *save, char **line, int nb)
 			return (0);
 		tmp = tmp->next;
 	}
+	free(l);
 	return (rewrite(save, tot, line));
 }
 
@@ -107,5 +108,6 @@ int		fill_line(char **line)
 	l[READ_SIZE] = '\0';
 	if (!(save = new_cell(l, i)))
 		return (0);
+	free(l);
 	return (save_gnl(save, line, i));
 }
