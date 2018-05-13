@@ -6,7 +6,7 @@
 #    By: arobion <arobion@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/11 18:20:34 by arobion           #+#    #+#              #
-#    Updated: 2018/05/12 17:17:30 by nkamolba         ###   ########.fr        #
+#    Updated: 2018/05/13 14:34:26 by arobion          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC =	hash_table.c \
 		store.c \
 		search.c \
 		write.c \
-		free_table.c
+		free_table.c \
+		gnl2.c
 
 OBJ = $(SRC:.c=.o)
 
