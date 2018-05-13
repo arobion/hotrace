@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 18:24:06 by arobion           #+#    #+#             */
-/*   Updated: 2018/05/13 16:03:50 by arobion          ###   ########.fr       */
+/*   Updated: 2018/05/13 16:31:52 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,17 @@ typedef struct		s_table
 	struct s_entry	**entry;
 }					t_table;
 
-int					hr_gnl(int const fd, char **line);
 int					hr_strlen(const char *str);
-void				store(t_table *table,char *line, int key, int val);
+void				store(t_table *table, char *line, int key, int val);
 int					allocate_table(t_table *table, int size);
 int					hash(char *str, int i, int table_size);
 void				search(t_table *table, char *line, int key);
 void				fill_buff(t_table *table, char *str, int index);
 void				fill_buff_not_found(t_table *table, char *str, int index);
-void				free_table(t_entry **entry);
 int					fill_line(char **line);
+void				store_phase(t_table *table, char *line, int *i);
+void				search_phase(t_table *tabvle, char *line, int *i);
+void				free_all(t_table *table, char *line);
+int					is_end(char *line, int index);
 
 #endif
